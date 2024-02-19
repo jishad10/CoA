@@ -1,0 +1,62 @@
+Question:
+
+Write· a program to read one of the hex digits A-F, and display it on the next line in decimal. 
+Sample execution: 
+ENTER A HEX DIGIT: F 
+IN DECIMAL IT IS: 15
+
+Answer :
+
+.model small
+.stack 100h
+ 
+.data
+    ab db 'ENTER A HEX DIGIT:$'
+    cd db 'IN DECIMAL IS IT:$'
+    ef db '1$' 
+    newl db 10, 13, '$'
+.code
+ 
+start:
+    mov ax,@data
+    mov ds,ax 
+    
+    mov ah,9
+    lea dx,ab
+    int 21h
+ 
+    mov ah,1 
+    int 21h
+    mov bh,al
+    
+    ;11hexadecimel sub kortechi
+    ;41->A ,11 minus korle 30 mani 0 ;check ascii codes
+    ;42->B, 11 minus korle 31 mani 1 
+    
+    sub bh,11h
+     
+    ;0,1,2 eibabe asbe but A or balue to 10,11
+    ;samne ekta 1 missing every time
+    ;tai 1 aage theke print ko re raktechi
+            
+    mov ah, 9
+    lea dx, newl
+    int 21h
+    
+    mov ah, 9
+    lea dx, cd
+    int 21h 
+    
+    mov ah, 9
+    lea dx, ef
+    int 21h 
+     
+    ;print
+    mov ah, 2
+    mov dl, bh
+    int 21h
+ 
+    mov ah,4Ch
+    int 21h
+ 
+end
