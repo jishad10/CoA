@@ -1,7 +1,7 @@
 Question:
 
 Write· a program to read one of the hex digits A-F, and display it on the next line in decimal. 
-Sample execution: 
+Sample execution.: 
 ENTER A HEX DIGIT: F 
 IN DECIMAL IT IS: 15
 
