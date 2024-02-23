@@ -1,4 +1,4 @@
-//2 ta varaible input ni e swap korbo
+//2 ta varaible input ni e swap korbo..
 
 .MODEL SMALL
 .STACK 100H
