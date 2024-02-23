@@ -1,0 +1,74 @@
+//Write a program to (a) display a "?", 
+(b) read two decimal digits whose sum is less than 10, 
+(c) display them and their sum on the next line, with an appropriate message.
+Sample execution:
+?27
+THE SUM OF 2 AND 7 IS 9
+
+
+Answer :
+
+
+.MODEL SMALL
+.STACK 100H
+.DATA
+     A DB "?$"
+     B DB "THE SUM OF $" 
+     C DB " AND $"
+     D DB " IS $"
+     NEWLINE DB 10,13, '$' 
+.CODE
+
+MAIN PROC
+    MOV AX,@DATA
+    MOV DS,AX 
+    
+    MOV AH,09H
+    LEA DX,A
+    INT 21H
+    
+    ;input read
+    MOV AH,1
+    INT 21H
+    MOV BH,AL
+    
+    MOV AH,1
+    INT 21H
+    MOV CH,AL 
+    
+    MOV AH,09H
+    LEA DX,NEWLINE
+    INT 21H
+    
+    MOV AH,09H
+    LEA DX,B
+    INT 21H 
+    
+    ;print 
+    MOV AH, 02h
+    MOV DL, BH
+    INT 21h 
+    
+    MOV AH,09H
+    LEA DX,C
+    INT 21H
+      
+    MOV AH, 02h
+    MOV DL, CH
+    INT 21h 
+    
+    MOV AH,09H
+    LEA DX,D
+    INT 21H
+  
+    ADD BH,CH
+    SUB BH,30H                  
+    
+    MOV AH,2
+    MOV DL,BH
+    INT 21H
+    
+    MOV AH,4CH
+    INT 21H
+    MAIN ENDP
+END
