@@ -1,0 +1,50 @@
+//output ey rokom asbe :
+hello world
+hello world
+hello world
+hello world
+hello world
+bye
+
+
+.model small
+.stack 100h
+.data
+    a db "hello world",10,13,'$' 
+    b db "bye",10,13, '$'
+.code
+ 
+ 
+main proc
+    mov ax,@data
+    mov ds,ax
+    
+    mov bh,5 ;bh register e 5 store korchi
+    mov cl,0 ;cl register e 0 store korchi 
+    
+hello:
+    cmp bh,cl   ;cmp kortechi
+    je bye
+    ;jodi equel hoi taile bye te jabe 
+    ;je hocce jump if equel
+    
+    mov ah,9h
+    lea dx,a
+    int 21h
+    
+    dec bh  ;bar bar dec hocce then jump to hello label 
+    ;This creates a loop that repeats until bh becomes zero
+    jmp hello 
+ 
+bye:
+    mov ah,9h
+    lea dx,b
+    int 21h
+ 
+    
+    ;exit
+    mov ah,4ch
+    int 21h
+    main endp
+ 
+end
