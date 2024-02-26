@@ -1,0 +1,51 @@
+//check the value positive or negative
+
+.model small
+.stack 100h
+.data
+    a db "ENTER A NUMBER : $" 
+    zero db 10,13, "THE NUMBER IS ZERO $"
+    pos db 10,13,"POSITIVE $" 
+    neg_ db 10,13, "NEGATIVE $"    
+.code
+
+main proc
+    mov ax,@data
+    mov ds,ax
+    
+    mov ah,9
+    lea dx,a
+    int 21h
+    
+    mov ah,1
+    int 21h  
+    
+    cmp al,'0'
+    jg positive     ;greater then 
+    jl negative     ;less then
+    
+    mov ah,9
+    lea dx,zero
+    int 21h
+    jmp exit
+ 
+positive:
+   mov ah,9
+   lea dx,pos
+   int 21h
+   jmp exit
+   
+negative:
+   mov ah,1    ;cmp korar somoy - di le neg label e ni e astcehe
+   int 21h     ;tai abar value ekta input ni te hocce 
+   
+   mov ah,9
+   lea dx,neg_
+   int 21h
+   jmp exit
+    
+exit: 
+    MOV AH, 4Ch
+    INT 21h
+MAIN ENDP
+END
