@@ -1,0 +1,58 @@
+//check a letter capital or small or invalid
+
+
+.model small
+.stack 100h
+.data
+    a db "ENTER A LETTER : $" 
+    cap db 10,13, "Its a capital letter $"
+    sm db 10,13,"Its a small letter $"
+    invalid db 10,13,"Invalid $" 
+.code      
+ 
+main proc
+    mov ax,@data
+    mov ds,ax
+    
+    mov ah,9
+    lea dx,a
+    int 21h
+    
+    mov ah,1
+    int 21h
+    
+    cmp al, 122
+    jg inval 
+    
+    cmp al,65
+    jl inval
+     
+    cmp al, 96
+    jg small
+    jl capital
+    jmp exit
+
+ 
+capital:
+   mov ah,9
+   lea dx,cap
+   int 21h
+   jmp exit
+   
+small:
+   mov ah,9
+   lea dx,sm
+   int 21h
+   jmp exit
+
+inval:
+   mov ah,9
+   lea dx,invalid
+   int 21h
+   jmp exit
+ 
+exit: 
+    MOV AH, 4Ch
+    INT 21h
+MAIN ENDP
+END
