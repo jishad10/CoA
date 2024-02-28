@@ -1,0 +1,70 @@
+//Suppose that CL contains the value of 5. Take an integer from user. 
+Compare the value with CL. And show whether the user input is less than, 
+greater than and equal to CL. Hints: use CMP, JL, JG, JE
+Sample output
+Enter a number: 1
+Less than 5
+
+Enter a number: 7 
+Greater than 5
+
+Enter a number: 5
+Equal to 5
+
+
+Ans :.............
+ 
+
+.model small
+.stack 100h
+.data
+    a db "Enter a number : $"
+    e_t db 10,13, "Equal to 5 $"
+    g_t db 10,13,"Greater than 5 $"
+    l_t db 10,13, "Less than 5 $"    
+.code
+
+main proc
+    mov ax,@data
+    mov ds,ax
+
+    mov cl,5  ; CL contains the value 5
+
+start:
+    mov ah, 9
+    lea dx, a
+    int 21h
+
+    mov ah,1
+    int 21h  
+    sub al, 48  ; Convert ASCII to integer
+
+    cmp al, cl
+    jg greater     
+    jl less
+    je equal
+    jmp exit    
+
+greater:
+    mov ah, 9
+    lea dx, g_t
+    int 21h
+    jmp exit
+
+less:  
+    mov ah, 9
+    lea dx, l_t
+    int 21h
+    jmp exit 
+
+equal:
+    mov ah, 9
+    lea dx, e_t
+    int 21h
+    jmp exit
+
+exit: 
+    MOV AH, 4Ch
+    INT 21h
+MAIN ENDP
+END
