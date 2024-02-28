@@ -1,0 +1,52 @@
+//Read a character and display it 50 times on the next line. Hints: use DEC and JNZ instructions and
+Sample Output
+Enter a character: d
+dddddddddddddddddddddddddddddddddddddddddddddddddd
+Thank you. 
+
+Ans :
+
+.model small
+.stack
+.data
+    a db "Enter a character: $"    
+    b db 10,13,"Thank you.$"
+    newl db 10,13,"$"
+.code
+
+main proc
+    mov ax, @data
+    mov ds, ax
+ 
+    mov cx, 50 
+    
+    mov ah, 9
+    lea dx, a
+    int 21h
+ 
+    mov ah, 1
+    int 21h
+    mov bh,al
+ 
+    mov ah,9
+    lea dx,newl
+    int 21h
+         
+repeat:
+    mov dl,bh   ;bh theke dl e rakchi abar do ro print ko ro
+    mov ah,2
+    int 21h
+ 
+    dec cx
+    jnz repeat  ;Jump if Not Zero
+ 
+    mov ah, 9
+    lea dx, b
+    int 21h
+  
+exit:
+    mov ah, 4ch
+    int 21h
+    main endp
+end
+
