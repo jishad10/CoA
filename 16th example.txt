@@ -1,0 +1,90 @@
+//Write an assembly program that prints Hello World five times and then prints Bye world. 
+Hints: Use unconditional  CMP, conditional JE, JNE instruction. 
+
+Sample Output
+Hello world 
+Hello world 
+Hello world
+Hello world
+Hello world
+
+Bye world
+
+Ans :.....
+
+.model small
+.stack 100h
+.data
+    a db "hello world",10,13,'$' 
+    b db "bye",10,13, '$'
+.code
+ 
+ 
+main proc
+    mov ax,@data
+    mov ds,ax
+    
+    mov bh,5 
+    mov cl,0 
+    
+hello:
+    cmp bh,cl   
+    je bye   
+    
+    mov ah,9h
+    lea dx,a
+    int 21h
+    
+    dec bh  
+    jne hello 
+ 
+bye:
+    mov ah,9h
+    lea dx,b
+    int 21h
+ 
+    mov ah,4ch
+    int 21h
+    main endp
+end
+
+
+
+//Write an assembly program that non-stop prints Hello World. 
+Hints: Use unconditional jmp and label instructions.
+Sample Output
+Hello world
+Hello world
+Hello world
+Hello world
+Hello world
+Hello world
+---------------
+Hello world
+
+
+Ans :........
+
+.model small
+.stack 100h
+.data
+    a db "hello world",10,13,'$' 
+.code
+ 
+ 
+main proc
+    mov ax,@data
+    mov ds,ax    
+    
+hello:    
+    mov ah,9h
+    lea dx,a
+    int 21h
+    
+    jmp hello
+    
+exit: 
+    mov ah,4ch
+    int 21h
+    main endp
+end
