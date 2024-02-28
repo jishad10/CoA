@@ -1,0 +1,52 @@
+//15 no er moto just cl er modde value store na ko re sorasori kortechi
+
+.model small
+.stack 100h
+.data
+    a db "Enter a number : $"
+    e_t db 10,13, "Equal to 5 $"
+    g_t db 10,13,"Greater than 5 $"
+    l_t db 10,13, "Less than 5 $"    
+.code
+
+main proc
+    mov ax,@data
+    mov ds,ax
+
+start:
+    mov ah, 9
+    lea dx, a
+    int 21h
+
+    mov ah,1
+    int 21h  
+
+    cmp al,'5'
+    jg greater     
+    jl less
+    je equal
+    jmp exit    
+
+greater:
+    mov ah, 9
+    lea dx, g_t
+    int 21h
+    jmp exit
+
+less:  
+    mov ah, 9
+    lea dx, l_t
+    int 21h
+    jmp exit 
+
+equal:
+    mov ah, 9
+    lea dx, e_t
+    int 21h
+    jmp exit
+
+exit: 
+    MOV AH, 4Ch
+    INT 21h
+MAIN ENDP
+END
