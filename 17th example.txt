@@ -1,0 +1,36 @@
+//Write a program to print all the capital letters. 
+
+Ans :..............
+
+
+.model small
+.stack
+.data
+    a db "Capital Letters: $"
+.code
+
+main proc
+    mov ax,@data
+    mov ds,ax 
+
+    mov ah,9
+    lea dx,a
+    int 21h
+
+    mov bl,'A'     ; Initialize bl with ASCII value of 'A'
+
+print_loop:
+    mov dl,bl    
+    mov ah,2     
+    int 21h       
+    
+    inc bl        
+    cmp bl,'Z'   
+    jle print_loop  ; If not, continue printing 
+exit:
+    mov ah,4ch   
+    int 21h
+
+main endp
+end
+
