@@ -1,0 +1,56 @@
+//Write a program to display "o" if AL contains 1 or 3; if AL contains 2 or 4, display "e".. 
+
+Ans :.................
+
+.model small
+.stack
+.data
+    a db "Input Character: $"
+    b db "o $" 
+    c db "e $"
+    newl db 10,13,"$"
+.code
+
+main proc
+    mov ax,@data
+    mov ds,ax
+
+    mov ah,9
+    lea dx,a
+    int 21h
+
+    mov ah,1
+    int 21h
+    mov bh,al
+
+    mov ah,9
+    lea dx,newl
+    int 21h
+
+    cmp bh,'1'   
+    je display_o  
+    cmp bh,'3'   
+    je display_o  
+
+    cmp bh,'2'   
+    je display_e  
+    cmp bh,'4'   
+    je display_e  
+
+display_o:
+    mov ah,9
+    lea dx,b
+    int 21h
+    jmp exit
+    
+display_e:
+    mov ah,9
+    lea dx,c
+    int 21h
+    jmp exit
+
+exit:
+    mov ah, 4ch
+    int 21h
+    main endp
+end 
