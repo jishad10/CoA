@@ -1,0 +1,48 @@
+//Write a program that can convert the user input character in UPPERCASE like below
+	Example:
+	ENTER A LOWER-CASE LETTER:  a
+	IN UPPERCASE IT IS:  A
+
+
+Ans :................
+
+
+.model small
+.stack
+.data
+    a db "ENTER A LOWER-CASE LETTER: $"
+    b db "IN UPPERCASE IT IS: $"
+    newl db 10,13, '$' 
+.code
+
+main proc
+    mov ax,@data
+    mov ds,ax 
+
+    mov ah,9
+    lea dx,a
+    int 21h
+
+    mov ah,1
+    int 21h
+    mov bh,al  
+
+    sub bh,32 
+    
+    mov ah,9
+    lea dx,newl
+    int 21h    
+    
+    mov ah,9
+    lea dx,b
+    int 21h
+
+    mov dl,bh 
+    mov ah,2
+    int 21h
+
+    mov ah,4ch
+    int 21h
+    
+main endp
+end 
