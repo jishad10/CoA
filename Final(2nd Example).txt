@@ -1,0 +1,101 @@
+.MODEL SMALL
+.STACK 100H
+.DATA   
+    A DB "Enter the first number: $"
+    B DB "Enter the second number: $"     
+    OP_MSG DB "Enter operation (+ or -): $"
+    ERROR_MSG DB "Invalid input! Please enter valid numbers and operation. $"
+    NEWLINE DB 10,13,'$'
+.CODE
+
+MAIN PROC
+    MOV AX,@DATA
+    MOV DS,AX
+    
+input1:
+    MOV AH,9
+    LEA DX,A
+    INT 21H
+    
+    MOV AH,1
+    INT 21H
+    CMP AL,'0'  
+    JB invalid_input
+    CMP AL,'9'
+    JA invalid_input
+    SUB AL,30H  
+    MOV BL,AL
+    
+input2:
+    MOV AH,9
+    LEA DX,NEWLINE
+    INT 21H
+    
+    MOV AH,9
+    LEA DX,B
+    INT 21H
+    
+    MOV AH,1
+    INT 21H
+    CMP AL,'0' 
+    JB invalid_input
+    CMP AL,'9'
+    JA invalid_input
+    SUB AL,30H 
+    MOV CL,AL
+    
+input_op:
+    MOV AH,9
+    LEA DX,NEWLINE
+    INT 21H
+    
+    MOV AH,9
+    LEA DX,OP_MSG
+    INT 21H
+    
+    MOV AH,1
+    INT 21H
+    CMP AL,'+'
+    JE add_numbers
+    CMP AL,'-'
+    JE subtract_numbers
+    JMP invalid_input
+    
+add_numbers:
+    ADD BL,CL
+    JMP display_result
+    
+subtract_numbers:
+    SUB BL,CL
+    JMP display_result
+    
+display_result:    
+    MOV AH,9
+    LEA DX,NEWLINE
+    INT 21H
+    
+    MOV AH,2
+    MOV DL,BL
+    ADD DL,30H
+    INT 21H
+    
+    MOV AH,4CH
+    INT 21H
+    
+invalid_input:
+    MOV AH,9
+    LEA DX,NEWLINE
+    INT 21H
+    
+    MOV AH,9
+    LEA DX,ERROR_MSG
+    INT 21H
+    
+    MOV AH,9
+    LEA DX,NEWLINE
+    INT 21H 
+    
+    JMP input1  ; take input again
+    
+MAIN ENDP
+END
