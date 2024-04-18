@@ -1,3 +1,9 @@
+//2. Write an assembly program to create a simple calculator that will facilitate the features like 
+Addition, Subtraction. Also, if a user gives a wrong input, show the ERROR message, and ask for input 
+again.
+
+Answer:
+
 .MODEL SMALL
 .STACK 100H
 .DATA   
