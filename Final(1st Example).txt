@@ -1,3 +1,8 @@
+//1. Write an assembly program to find whether a character (user input) is VOWEL or CONSONANT or a 
+NUMBER? If user gives any wrong input, show ERROR message. 
+
+Answer:
+
 .model small
 .stack
 .data
