@@ -1,3 +1,8 @@
+//4.Put the sum of 30 even numbers in a variable. For see the value stored in a variable press the 
+following button. 
+
+Answer:
+
 .MODEL SMALL
 .STACK 100H
 .DATA   
