@@ -1,3 +1,7 @@
+//3. Put the sum 100 + 95 + 90 + ... + 5 in AX.  Hints: Employ LOOP instructions to do the following.
+
+Answer:
+
 .MODEL SMALL
 .STACK 100H
 .DATA   
