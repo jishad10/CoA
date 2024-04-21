@@ -1,0 +1,26 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+ 
+.CODE
+
+MAIN PROC
+    MOV AX,@DATA
+    MOV DS,AX 
+    
+    MOV CX,256   
+    MOV BX,0      
+          
+PRINT_LOOP:
+    MOV AH,2
+    MOV DL,BL  ;initially 0 , bl use as  a counter here     
+    INT 21H       
+    MOV DL,' '    
+    INT 21H       
+    INC BX        
+    LOOP PRINT_LOOP  
+    
+    MOV AH,4CH    
+    INT 21H
+    MAIN ENDP
+END
