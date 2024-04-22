@@ -1,0 +1,68 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+    A DB "Enter a Number : $"
+    B DB "The number is even $"
+    C DB "The number is odd $"
+    D DB "It's not a number $"
+    NEWLINE DB 10,13,'$'
+.CODE
+
+MAIN PROC
+    MOV AX,@DATA
+    MOV DS,AX
+
+    MOV AH,9       
+    LEA DX,A
+    INT 21H
+
+    MOV AH,1        
+    INT 21H 
+    
+    CMP AL,'0'
+    JB INVALID
+    CMP AL,'9'
+    JA INVALID           
+
+    TEST AL,1          ; Check if the least significant bit is set (odd)
+    JZ EVEN            ; If ZF = 1, it's even bcz least singni. bit is 0
+    JMP ODD            
+    
+EVEN:
+    MOV AH,9        
+    LEA DX,NEWLINE
+    INT 21H
+    
+    MOV AH,9        
+    LEA DX,B
+    INT 21H
+    JMP EXIT
+
+ODD:
+    MOV AH,9        
+    LEA DX,NEWLINE
+    INT 21H
+    
+    MOV AH,9        
+    LEA DX,C
+    INT 21H
+    JMP EXIT
+
+INVALID:
+    MOV AH,9        
+    LEA DX,NEWLINE
+    INT 21H
+    
+    MOV AH,9        
+    LEA DX,D
+    INT 21H
+    
+EXIT:
+    MOV AH,9        
+    LEA DX,NEWLINE
+    INT 21H
+
+    MOV AH,4CH      
+    INT 21H
+MAIN ENDP
+END MAIN
