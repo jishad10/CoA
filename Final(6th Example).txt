@@ -11,17 +11,17 @@ main proc
      lea dx,a
      int 21h
      
-     mov bx,0  ;xor bx,bx
-     mov cx,16
+     mov bx,0      ;xor bx,bx ;bx ke clear korchi  16 bit 0
+     mov cx,16     ;loop chalobo
      
 input_:
      mov ah,1
      int 21h
-     cmp al,13
+     cmp al,13     ;enter 
      je output_
      
-     and al,0Fh ;sub al,30h
-     shl bx,1
+     and al,0Fh    ;or sub al,30h ;1 di le jate 1 pai ;binary te convert
+     shl bx,1     
      or bl,al
      loop input_
      
@@ -36,11 +36,11 @@ output_:
      lea dx,b
      int 21h
      
-     mov cx,16
+     mov cx,16     ;cx 16 again bcz ager ta input niwar por 0 hoi gece, ey ta output er jonno
 
 output_1:
-     shl bx,1
-     jnc zero
+     shl bx,1      ;jey ta left shift ko re to le felbo oi tai carry te jabe
+     jnc zero      ;jodi cf=0 carry na thake taile zero te jabe and 0 print di be
      mov ah,2
      mov dl,31h
      int 21h
