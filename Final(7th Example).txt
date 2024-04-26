@@ -11,7 +11,7 @@ main proc
      lea dx,a
      int 21h
      
-     mov bx,0  ;xor bx,bx 
+     mov bx,0      ;xor bx,bx 
      mov cl,4
           
 input_:
@@ -20,16 +20,16 @@ input_:
      
      cmp al,13
      je output_
-     cmp al,41h  ;41=A
+     cmp al,41h    ;41=A ,A,B toh letter jodi letter hoi
      jge letter
-     and al,0Fh ;sub al,30h
+     and al,0Fh    ;sub al,30h
      jmp shift
 
 letter:
-     sub al,37h 
+     sub al,37h    ;bcz jodi A=1010 laagbe so 41h-37h=1010
      
 shift:
-     shl bx,cl
+     shl bx,cl     ;cl=4 ,so 4 gor shift hobe
      or bl,al
      jmp input_
      
@@ -64,4 +64,4 @@ output_loop:
      mov ah,4ch
      int 21h
      main Endp
-End
+End     
