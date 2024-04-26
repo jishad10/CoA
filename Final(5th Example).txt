@@ -6,13 +6,12 @@
 main proc
      mov ax,@data
      mov ds,ax
-     
-     
+          
      mov ah,9
      lea dx,a
      int 21h 
      
-     xor cx,cx  ; x er value clear kora
+     xor cx,cx    ;cx er value clear kora
      mov ah,1
      int 21h
 
@@ -37,10 +36,10 @@ output_:
      int 21h 
      
      mov ah,2
-     jcxz exit
+     jcxz exit     ;cx=0
 
 top:             
-     pop dx
+     pop dx        ;pop ko re dx e raktechi
      int 21h
      
      loop top
