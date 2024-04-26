@@ -29,7 +29,6 @@ main proc
      ret 
      display endp
      
-     
      input proc
                   
 input_:
