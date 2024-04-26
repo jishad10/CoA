@@ -2,7 +2,8 @@
 .data
      a db "Enter a Hex value : $"
      b db "Output : $"
-.code 
+.code
+ 
 main proc
      mov ax,@data
      mov ds,ax
@@ -11,7 +12,7 @@ main proc
      lea dx,a
      int 21h
      
-     mov bx,0  ;xor bx,bx 
+     mov bx,0     
      mov cl,4
           
 input_:
@@ -20,9 +21,9 @@ input_:
      
      cmp al,13
      je output_
-     cmp al,41h  ;41=A
+     cmp al,41h     
      jge letter
-     and al,0Fh ;sub al,30h
+     and al,0Fh     
      jmp shift
 
 letter:
@@ -48,13 +49,13 @@ output_:
      mov ah,2
 
 output_1:
-     mov dl,bh
-     shr dl,4
-     rol bx,4 ; rotate 
-     cmp dl,0Ah ;10
+     mov dl,bh           ;just 16 tar modde high bit 8 ta ni e kaj korbo
+     shr dl,4            ;10101110 thakle 1010 laagteche tai
+     rol bx,4            ;suppose 1010 ber kora sesh hole left er gola rotate ko re right e ni e jabo 
+     cmp dl,10           ;1010 er chaite beshi hole
      jge letteroutput
      
-     add dl,30h
+     add dl,30h          
      int 21h
      jmp exit1
      
