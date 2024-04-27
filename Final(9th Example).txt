@@ -1,0 +1,24 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+    A DB "Enter value : $"    
+.CODE
+
+MAIN PROC
+    MOV AX,@DATA
+    MOV DS,AX
+    
+    MOV AH,9
+    LEA DX,A
+    INT 21H 
+    
+REPEAT:
+    MOV AH,1
+    INT 21H
+    CMP AL,' '    ; Check if the character is a blank
+    JNE REPEAT    ; If not a blank, repeat
+
+    MOV AH,4CH    
+    INT 21H
+MAIN ENDP
+END MAIN
