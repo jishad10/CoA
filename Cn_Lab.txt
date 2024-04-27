@@ -1,0 +1,51 @@
+<--- OSPF--->
+
+Router 0:
+ 
+en
+conf t
+
+int Fa0/0 
+ip address 192.168.10.1 255.255.255.128
+no shut
+
+int Se0/2/0
+ip address 192.168.10.170 255.255.255.252
+no shut
+
+int Se0/3/1
+ip address 192.168.10.173 255.255.255.252
+no shut
+
+
+
+OSPF CONFIGURATION:
+
+Router 1:
+
+router ospf 10
+router-id 1.2.2.10
+network 192.168.5.128 0.0.0.31 area 0
+network 192.168.5.144 0.0.0.3 area 0
+network 192.168.5.140 0.0.0.3 area 0
+exit
+
+
+
+<--EIGRP--->
+
+router eigrp 1 
+network 192.168.10.168  0.0.0.3
+network 192.168.10.172 0.0.0.3
+network 192.168.10.0 0.0.0.127
+no auto-summary
+
+
+
+
+
+
+
+
+
+
