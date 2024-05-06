@@ -1,8 +1,10 @@
 .model small
+.stack 100h
 .data
      a db "Enter value : $"
      b db "Output : $"
-.code 
+.code
+ 
 main proc
      mov ax,@data
      mov ds,ax
@@ -39,7 +41,7 @@ output_:
      jcxz exit     ;cx=0
 
 top:             
-     pop dx        ;pop ko re dx e raktechi
+     pop dx        ;dx e cilo pop kortechi
      int 21h
      
      loop top
